@@ -1,4 +1,4 @@
-package com.android.favqs.data.remote.quotes
+package com.android.favqs.data.source.quotes.models
 
 import com.android.favqs.domain.models.quotes.Quote
 import java.io.Serializable

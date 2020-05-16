@@ -1,4 +1,4 @@
-package com.android.favqs.data.remote.account.models.params
+package com.android.favqs.data.source.account.models.params
 
 import java.io.Serializable
 
