@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 @ActivityScope
 class LandingViewModel @Inject constructor(
-    val accountRepository: AccountRepository
+    private val accountRepository: AccountRepository
 ) : ViewModel() {
 
     enum class AuthenticationState {
@@ -21,7 +21,6 @@ class LandingViewModel @Inject constructor(
     }
 
     val authenticationState = MutableLiveData<AuthenticationState>()
-    val usernameState = MutableLiveData<String>()
 
     init {
         authenticationState.value = AuthenticationState.PENDING
@@ -30,9 +29,8 @@ class LandingViewModel @Inject constructor(
     fun onSubscribe() {
         viewModelScope.launch {
             try {
-                delay(2500)
-                val accountUser = accountRepository.getAccountUser()
-                usernameState.value = accountUser.login
+                delay(2000)
+                accountRepository.getAccountUser()
                 authenticationState.value = AuthenticationState.AUTHENTICATED
             } catch (e: Exception) {
                 authenticationState.value = AuthenticationState.UNAUTHENTICATED

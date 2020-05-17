@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">favqs</string>
     <string name="app_logo">favqs logo</string>
+    <string name="avatar_content_description">Mon avatar</string>
     <string name="mandatory_field_error">Ce champ est obligatoire</string>
     <string name="login_connect_cta">Me connecter</string>
 </resources>

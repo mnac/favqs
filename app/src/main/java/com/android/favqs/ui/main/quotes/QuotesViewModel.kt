@@ -18,6 +18,8 @@ class QuotesViewModel @Inject constructor(
 
     val quotes = MutableLiveData<List<Quote>>().apply { value = emptyList() }
     val isLoading = MutableLiveData<Boolean>().apply { value = false }
+    val username = MutableLiveData<String>()
+    val userPictureUrl = MutableLiveData<String>()
     val isError = MutableLiveData<Boolean>().apply { value = false }
     val isEmpty = MutableLiveData<Boolean>().apply { value = false }
 
@@ -27,8 +29,13 @@ class QuotesViewModel @Inject constructor(
                 isEmpty.value = false
                 isError.value = false
                 isLoading.value = true
+
                 val accountUser = accountRepository.getAccountUser()
+                username.value = accountUser.login
+                userPictureUrl.value = accountUser.pictureUrl
+
                 quotes.value = quotesRepository.getFavoritesQuotes(accountUser.login)
+
                 isLoading.value = false
                 if (quotes.value.isNullOrEmpty()) {
                     isEmpty.value = true
