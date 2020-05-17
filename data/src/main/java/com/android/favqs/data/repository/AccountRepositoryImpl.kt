@@ -19,14 +19,14 @@ class AccountRepositoryImpl @Inject constructor(
         if (accountSessionToken.token == null) {
             throw UnknownAuthenticationException()
         } else {
-            return AccountUser("Temp name")
+            return AccountUser("Temp name", null, 0)
         }
     }
 
-    override suspend fun connectUser(email: String, password: String): Boolean {
+    override suspend fun connectUser(email: String, password: String): AccountUser {
         val accountSessionToken = remoteSource.loginAccount(email = email, password = password)
         localSource.saveAccountToken(accountSessionToken = accountSessionToken)
         sessionInterceptor.setSessionToken(accountSessionToken.token)
-        return true
+        return remoteSource.getAccount(accountSessionToken.login)
     }
 }

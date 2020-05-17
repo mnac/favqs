@@ -10,16 +10,21 @@ class AccountLocalDataSource @Inject constructor(
 
     companion object {
         const val ACCOUNT_SESSION_TOKEN = "token_session"
+        const val ACCOUNT_SESSION_LOGIN = "login_session"
     }
 
     override suspend fun saveAccountToken(accountSessionToken: AccountToken) {
         accountSessionToken.token?.let {
             persistedPreferences.putString(ACCOUNT_SESSION_TOKEN, it)
         }
+        accountSessionToken.login?.let {
+            persistedPreferences.putString(ACCOUNT_SESSION_LOGIN, it)
+        }
     }
 
     override suspend fun getAccountToken(): AccountToken {
         val token = persistedPreferences.getString(ACCOUNT_SESSION_TOKEN)
-        return AccountToken(token)
+        val login = persistedPreferences.getString(ACCOUNT_SESSION_LOGIN)
+        return AccountToken(token = token, login = login ?: "")
     }
 }

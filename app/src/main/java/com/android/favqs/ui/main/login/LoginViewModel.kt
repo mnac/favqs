@@ -25,6 +25,13 @@ class LoginViewModel @Inject constructor(
     val passwordResError = MutableLiveData<Int>()
     val isPasswordError = MutableLiveData<Boolean>()
 
+    val login = MutableLiveData<String>()
+
+    fun init() {
+        email.value = "nacrymathias@hotmail.com"
+        password.value = "ygZGp21sugjVDoUF"
+    }
+
     fun connect() {
         email.value?.let { email ->
             isEmailError.value = false
@@ -32,10 +39,8 @@ class LoginViewModel @Inject constructor(
                 isPasswordError.value = false
                 viewModelScope.launch {
                     try {
-                        val connectionResult = accountRepository.connectUser(
-                            email = email,
-                            password = password
-                        )
+                        val user = accountRepository.connectUser(email = email, password = password)
+                        login.value = user.login
                     } catch (e: Exception) {
                         isEmailError.value = true
                         emailError.value = e.message

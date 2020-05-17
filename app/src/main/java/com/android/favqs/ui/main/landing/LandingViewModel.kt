@@ -32,7 +32,7 @@ class LandingViewModel @Inject constructor(
             try {
                 delay(2500)
                 val accountUser = accountRepository.restoreAccount()
-                usernameState.value = accountUser.userName
+                usernameState.value = accountUser.login
                 authenticationState.value = AuthenticationState.AUTHENTICATED
             } catch (e: Exception) {
                 authenticationState.value = AuthenticationState.UNAUTHENTICATED

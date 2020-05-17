@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.android.favqs.FavQsApp
 import com.android.favqs.R
 import com.android.favqs.databinding.LoginFragmentBinding
@@ -42,5 +44,11 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.login.observe(viewLifecycleOwner, Observer { username ->
+            context?.let {
+                Toast.makeText(it, "Welcome back $username", Toast.LENGTH_LONG).show()
+            }
+        })
+        viewModel.init()
     }
 }

@@ -4,5 +4,5 @@ import com.android.favqs.domain.models.account.AccountUser
 
 interface AccountRepository {
     suspend fun restoreAccount(): AccountUser
-    suspend fun connectUser(email: String, password: String): Boolean
+    suspend fun connectUser(email: String, password: String): AccountUser
 }

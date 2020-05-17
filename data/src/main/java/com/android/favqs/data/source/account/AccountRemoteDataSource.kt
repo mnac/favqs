@@ -6,6 +6,7 @@ import com.android.favqs.data.source.account.models.params.AccountLoginParamsDat
 import com.android.favqs.data.source.account.models.params.AccountLoginUserParamsData
 import com.android.favqs.data.source.account.models.toDomain
 import com.android.favqs.domain.models.account.AccountToken
+import com.android.favqs.domain.models.account.AccountUser
 import javax.inject.Inject
 
 class AccountRemoteDataSource @Inject constructor(
@@ -19,10 +20,14 @@ class AccountRemoteDataSource @Inject constructor(
                 password = password
             )
         )
-        val result = accountRemoteService.loginUser(params = params)
+        val result = accountRemoteService.loginAccount(params = params)
 
         if (result.token.isNullOrBlank()) throw LoginException(result.message)
 
         return result.toDomain()
+    }
+
+    override suspend fun getAccount(login: String): AccountUser {
+        return accountRemoteService.getAccount(login).toDomain()
     }
 }

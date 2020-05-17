@@ -13,5 +13,6 @@ data class AccountSessionRemoteData(
 ) : Serializable
 
 fun AccountSessionRemoteData.toDomain() = AccountToken(
+    login = this.login!!,
     token = this.token
 )
