@@ -1,38 +1,42 @@
 package com.android.favqs.ui.main.quotes
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.android.favqs.R
+import com.android.favqs.databinding.QuotesViewBinding
 import com.android.favqs.domain.models.quotes.Quote
-import kotlinx.android.synthetic.main.quotes_view.view.*
 
-class QuotesAdapter : RecyclerView.Adapter<QuoteViewHolder>() {
-    var list = ArrayList<Quote>()
+class QuotesAdapter(private val viewModel: QuotesViewModel) :
+    RecyclerView.Adapter<QuoteViewHolder>() {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuoteViewHolder {
-        return QuoteViewHolder(parent)
+        return QuoteViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(holder: QuoteViewHolder, position: Int) {
-        holder.bind(list[position])
+        viewModel.quotes.value?.get(position)?.let {
+            holder.bind(it)
+        }
     }
 
-    fun setItem(list: List<Quote>) {
-        this.list.addAll(list)
-        notifyDataSetChanged()
-    }
-
-    override fun getItemCount(): Int = list.size
+    override fun getItemCount(): Int = viewModel.quotes.value?.size ?: 0
 }
 
-class QuoteViewHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    constructor(parent: ViewGroup) : this(
-        LayoutInflater.from(parent.context).inflate(R.layout.quotes_view, parent, false)
-    )
+class QuoteViewHolder constructor(private val binding: QuotesViewBinding) :
+    RecyclerView.ViewHolder(binding.root) {
 
     fun bind(quote: Quote) {
-        itemView.quoteBodyTxtVw.text = quote.body
-        itemView.quoteAuthorTxtVw.text = quote.author
+        binding.quoteBodyTxtVw.text = quote.body
+        binding.quoteAuthorTxtVw.text = quote.author
+        binding.executePendingBindings()
+    }
+
+    companion object {
+        fun from(parent: ViewGroup): QuoteViewHolder {
+            val layoutInflater = LayoutInflater.from(parent.context)
+            val binding = QuotesViewBinding.inflate(layoutInflater, parent, false)
+
+            return QuoteViewHolder(binding)
+        }
     }
 }

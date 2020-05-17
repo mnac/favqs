@@ -5,7 +5,7 @@
 
         <variable
             name="viewmodel"
-            type="com.android.favqs.ui.main.quotes.QuotesFragment" />
+            type="com.android.favqs.ui.main.quotes.QuotesViewModel" />
     </data>
 
     <FrameLayout xmlns:tools="http://schemas.android.com/tools"
