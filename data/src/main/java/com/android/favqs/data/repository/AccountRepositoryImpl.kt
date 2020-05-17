@@ -27,6 +27,8 @@ class AccountRepositoryImpl @Inject constructor(
         val accountSessionToken = remoteSource.loginAccount(email = email, password = password)
         localSource.saveAccountToken(accountSessionToken = accountSessionToken)
         sessionInterceptor.setSessionToken(accountSessionToken.token)
-        return remoteSource.getAccount(accountSessionToken.login)
+        val accountUser = remoteSource.getAccount(accountSessionToken.login)
+        localSource.saveAccountUser(accountUser)
+        return accountUser
     }
 }

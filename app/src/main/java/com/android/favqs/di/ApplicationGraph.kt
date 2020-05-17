@@ -2,8 +2,10 @@ package com.android.favqs.di
 
 import android.app.Application
 import android.content.Context
+import androidx.room.Room
 import com.android.favqs.data.repository.AccountRepositoryImpl
 import com.android.favqs.data.repository.QuotesRepositoryImpl
+import com.android.favqs.data.service.local.PersistedDatabase
 import com.android.favqs.data.service.local.PersistedPreferences
 import com.android.favqs.data.service.remote.HeadersInterceptor
 import com.android.favqs.data.service.remote.SessionInterceptor
@@ -18,6 +20,7 @@ import com.android.favqs.data.source.quotes.QuotesRemoteDataSource
 import com.android.favqs.domain.repository.AccountRepository
 import com.android.favqs.domain.repository.QuotesRepository
 import com.android.favqs.frameworks.LocalPreferences
+import com.android.favqs.frameworks.database.AppDatabase
 import dagger.Component
 import dagger.Module
 import dagger.Provides
@@ -33,6 +36,7 @@ import javax.inject.Singleton
         ContextModule::class,
         PersistedPreferencesModule::class,
         NetworkServiceModule::class,
+        DBServiceModule::class,
         ServiceRemoteModule::class,
         DataSourceLocalModule::class,
         DataSourceRemoteModule::class,
@@ -82,8 +86,14 @@ class RepositoryModule {
 class DataSourceLocalModule {
     @Provides
     @Singleton
-    fun accountLocalService(localPreferences: PersistedPreferences): AccountDataSource.Local {
-        return AccountLocalDataSource(persistedPreferences = localPreferences)
+    fun accountLocalService(
+        preferences: PersistedPreferences,
+        database: PersistedDatabase
+    ): AccountDataSource.Local {
+        return AccountLocalDataSource(
+            persistedPreferences = preferences,
+            persistedDatabase = database
+        )
     }
 
     @Provides
@@ -107,6 +117,23 @@ class DataSourceRemoteModule {
     fun remoteQuotesDataSource(quotesRemoteService: QuotesRemoteService)
             : QuotesDataSource.Remote {
         return QuotesRemoteDataSource(quotesRemoteService)
+    }
+}
+
+@Module
+class DBServiceModule {
+    companion object {
+        private const val DB_NAME = "database-name"
+    }
+
+    @Provides
+    @Singleton
+    fun database(app: Context): PersistedDatabase {
+        return Room.databaseBuilder(
+            app.applicationContext,
+            AppDatabase::class.java,
+            DB_NAME
+        ).build()
     }
 }
 

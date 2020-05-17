@@ -12,5 +12,7 @@ interface AccountDataSource {
     interface Local : AccountDataSource {
         suspend fun saveAccountToken(accountSessionToken: AccountToken)
         suspend fun getAccountToken(): AccountToken
+        suspend fun saveAccountUser(user: AccountUser)
+        suspend fun getAccountUser(login: String): AccountUser
     }
 }
