@@ -11,7 +11,13 @@ class QuotesRepositoryImpl @Inject constructor(
     private val localSource: QuotesDataSource.Local,
     private val remoteSource: QuotesDataSource.Remote
 ) : QuotesRepository {
-    override suspend fun getFavoritesQuotes(): List<Quote> {
-        TODO("Not yet implemented")
+    override suspend fun getFavoritesQuotes(login: String): List<Quote> {
+        return try {
+            val quotes = remoteSource.getFavoritesQuotes(login = login)
+            if (quotes.isNotEmpty()) localSource.saveFavoritesQuotes(quotes)
+            quotes
+        } catch (e: Exception) {
+            localSource.getFavoritesQuotes(login = login)
+        }
     }
 }

@@ -31,7 +31,7 @@ class LandingViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 delay(2500)
-                val accountUser = accountRepository.restoreAccount()
+                val accountUser = accountRepository.getAccountUser()
                 usernameState.value = accountUser.login
                 authenticationState.value = AuthenticationState.AUTHENTICATED
             } catch (e: Exception) {

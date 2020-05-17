@@ -14,7 +14,7 @@ class AccountRepositoryImpl @Inject constructor(
     private val remoteSource: AccountDataSource.Remote,
     private val sessionInterceptor: SessionInterceptor
 ) : AccountRepository {
-    override suspend fun restoreAccount(): AccountUser {
+    override suspend fun getAccountUser(): AccountUser {
         val accountSessionToken = localSource.getAccountToken()
         if (accountSessionToken.token == null) {
             throw UnknownAuthenticationException()

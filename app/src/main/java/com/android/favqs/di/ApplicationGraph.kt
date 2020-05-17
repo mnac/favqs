@@ -98,8 +98,8 @@ class DataSourceLocalModule {
 
     @Provides
     @Singleton
-    fun quotesLocalService(): QuotesDataSource.Local {
-        return QuotesLocalDataSource()
+    fun quotesLocalService(persistedDatabase: PersistedDatabase): QuotesDataSource.Local {
+        return QuotesLocalDataSource(persistedDatabase)
     }
 }
 
