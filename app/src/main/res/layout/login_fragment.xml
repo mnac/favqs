@@ -7,6 +7,18 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.login.LoginFragment">
 
+    <ImageView
+        android:id="@+id/logoImgVw"
+        android:layout_width="@dimen/logo_size"
+        android:layout_height="@dimen/logo_size"
+        android:layout_gravity="center"
+        android:contentDescription="@string/app_logo"
+        app:layout_constraintBottom_toTopOf="@+id/emailTxtInputLyt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_quote" />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/emailTxtInputLyt"
         android:layout_width="0dp"

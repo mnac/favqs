@@ -7,8 +7,8 @@
     tools:context=".ui.main.landing.LandingFragment">
 
     <ImageView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="@dimen/logo_size"
+        android:layout_height="@dimen/logo_size"
         android:layout_gravity="center"
         android:contentDescription="@string/app_logo"
         app:srcCompat="@drawable/ic_quote" />
