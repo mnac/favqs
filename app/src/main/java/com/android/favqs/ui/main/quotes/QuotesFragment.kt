@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.android.favqs.FavQsApp
@@ -27,6 +28,11 @@ class QuotesFragment : Fragment() {
             .quotesComponent()
             .create()
             .inject(this)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        requireActivity().onBackPressedDispatcher.addCallback { activity?.finish() }
     }
 
     override fun onCreateView(

@@ -1,5 +1,6 @@
 package com.android.favqs.views
 
+import android.view.View
 import androidx.annotation.StringRes
 import androidx.databinding.BindingAdapter
 import com.google.android.material.textfield.TextInputLayout
@@ -13,4 +14,9 @@ fun setErrorMessage(view: TextInputLayout, errorMessage: String?) {
 @BindingAdapter("app:errorRes")
 fun setErrorMessage(view: TextInputLayout, @StringRes errorMessage: Int?) {
     errorMessage?.let { view.error = view.context.getString(it) }
+}
+
+@BindingAdapter("android:visibility")
+fun setVisibility(view: View, value: Boolean) {
+    view.visibility = if (value) View.VISIBLE else View.GONE
 }

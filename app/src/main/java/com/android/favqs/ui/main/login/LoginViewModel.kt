@@ -14,6 +14,9 @@ class LoginViewModel @Inject constructor(
     private val accountRepository: AccountRepository
 ) : ViewModel() {
 
+    val isLoading = MutableLiveData<Boolean>().apply { value = false }
+    val isConnected = MutableLiveData<Boolean>().apply { value = false }
+
     val email = MutableLiveData<String>()
     val password = MutableLiveData<String>()
 
@@ -39,9 +42,13 @@ class LoginViewModel @Inject constructor(
                 isPasswordError.value = false
                 viewModelScope.launch {
                     try {
+                        isLoading.value = true
                         val user = accountRepository.connectUser(email = email, password = password)
                         login.value = user.login
+                        isConnected.value = true
+                        isLoading.value = false
                     } catch (e: Exception) {
+                        isLoading.value = false
                         isEmailError.value = true
                         emailError.value = e.message
 
