@@ -6,7 +6,10 @@ buildscript {
     ext.dagger = '2.27'
     ext.retrofit_2 = '2.8.1'
     ext.okhttp_3 = '4.6.0'
-    ext.nav_version = '2.2.2'
+    ext.android_nav = '2.2.2'
+    ext.android_lifecycle = '2.2.0'
+    ext.room = '2.2.5'
+
     repositories {
         google()
         jcenter()

@@ -6,6 +6,6 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface AccountRemoteService {
-    @POST("/api/session")
+    @POST("session")
     suspend fun loginUser(@Body params: AccountLoginParamsData): AccountSessionRemoteData
 }

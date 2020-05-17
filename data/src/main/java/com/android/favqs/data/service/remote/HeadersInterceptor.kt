@@ -35,7 +35,7 @@ class HeadersInterceptor @Inject constructor() : Interceptor, SessionInterceptor
             .header(AUTHORIZATION_HEADER_KEY, AUTHORIZATION_HEADER_VALUE)
 
         sessionToken?.let {
-            requestBuilder.header(SESSION_HEADER_KEY, it)
+            requestBuilder.addHeader(SESSION_HEADER_KEY, it)
         }
 
         return chain.proceed(requestBuilder.build())

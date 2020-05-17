@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/landingFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.android.favqs.ui.main.login.LoginFragment"
+        android:label="login_fragment"
+        tools:layout="@layout/login_fragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_quotesFragment"
+            app:destination="@id/quotesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/landingFragment"
+        android:name="com.android.favqs.ui.main.landing.LandingFragment"
+        android:label="landing_fragment"
+        tools:layout="@layout/landing_fragment" >
+        <action
+            android:id="@+id/action_landingFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_landingFragment_to_quotesFragment"
+            app:destination="@id/quotesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/quotesFragment"
+        android:name="com.android.favqs.ui.main.quotes.QuotesFragment"
+        android:label="quotes_fragment"
+        tools:layout="@layout/quotes_fragment" />
+</navigation>

@@ -12,9 +12,10 @@ class AccountRepositoryImpl @Inject constructor(
     private val remoteSource: AccountDataSource.Remote,
     private val sessionInterceptor: SessionInterceptor
 ) : AccountRepository {
-    override suspend fun connectUser(email: String, password: String) {
+    override suspend fun connectUser(email: String, password: String): Boolean {
         val accountSessionToken = remoteSource.loginAccount(email = email, password = password)
         localSource.saveAccountToken(accountSessionToken = accountSessionToken)
         sessionInterceptor.setSessionToken(accountSessionToken.token)
+        return true
     }
 }
