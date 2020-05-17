@@ -19,7 +19,7 @@ class AccountRepositoryImpl @Inject constructor(
         if (accountSessionToken.token == null) {
             throw UnknownAuthenticationException()
         } else {
-            return AccountUser("Temp name", null, 0)
+            return localSource.getAccountUser(accountSessionToken.login)
         }
     }
 
