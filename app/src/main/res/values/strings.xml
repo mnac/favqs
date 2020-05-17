@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">favqs</string>
     <string name="app_logo">favqs logo</string>
+    <string name="mandatory_field_error">Ce champ est obligatoire</string>
 </resources>

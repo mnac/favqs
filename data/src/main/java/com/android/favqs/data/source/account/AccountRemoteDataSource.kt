@@ -1,5 +1,6 @@
 package com.android.favqs.data.source.account
 
+import com.android.favqs.data.exception.LoginException
 import com.android.favqs.data.service.remote.account.AccountRemoteService
 import com.android.favqs.data.source.account.models.params.AccountLoginParamsData
 import com.android.favqs.data.source.account.models.params.AccountLoginUserParamsData
@@ -18,6 +19,10 @@ class AccountRemoteDataSource @Inject constructor(
                 password = password
             )
         )
-        return accountRemoteService.loginUser(params = params).toDomain()
+        val result = accountRemoteService.loginUser(params = params)
+
+        if (result.token.isNullOrBlank()) throw LoginException(result.message)
+
+        return result.toDomain()
     }
 }
