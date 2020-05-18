@@ -4,4 +4,5 @@
     <string name="avatar_content_description">Mon avatar</string>
     <string name="mandatory_field_error">Ce champ est obligatoire</string>
     <string name="login_connect_cta">Me connecter</string>
+    <string name="quotes_empty_state">Vous n\'avez pas encore de citation favorite\n\nConnectez-vous au site web pour en ajouter</string>
 </resources>

@@ -32,7 +32,6 @@ class LoginViewModel @Inject constructor(
 
     fun init() {
         email.value = "nacrymathias@hotmail.com"
-        password.value = "ygZGp21sugjVDoUF"
     }
 
     fun connect() {
